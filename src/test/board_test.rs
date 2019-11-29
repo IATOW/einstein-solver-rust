@@ -171,3 +171,57 @@ fn winner() {
     };
     assert_eq!(1, board::winner(&board));
 }
+
+#[test]
+fn valid_move() {
+    let board = board::Board {
+        red_remain: 2,
+        blue_remain: 5,
+        data: [
+            [1,  0,  0,  0,  0],
+            [0,  -5,  0,  0,  0],
+            [0,  0,  0,  0, -6],
+            [0,  0,  0, 5, -4],
+            [0,  0, -3, -2, 0]
+        ]
+    };
+    let mut moves = board::valid_move(&board, 5, 1);
+    moves.sort();
+    let mut ans = vec![334, 335, 336];
+    ans.sort();
+    assert_eq!(ans, moves);
+
+    let board = board::Board {
+        red_remain: 2,
+        blue_remain: 5,
+        data: [
+            [1,  0,  0,  0,  0],
+            [0,  0,  0,  0,  0],
+            [0,  0,  0,  0, -6],
+            [0,  0,  0, 5, -4],
+            [0,  0, -3, -2, 0]
+        ]
+    };
+    let mut moves = board::valid_move(&board, 5, 2);
+    moves.sort();
+    let mut ans = vec![240, 241, 242, 340, 341, 342];
+    ans.sort();
+    assert_eq!(ans, moves);
+
+    let board = board::Board {
+        red_remain: 2,
+        blue_remain: 5,
+        data: [
+            [1, -1,  0,  0,  0],
+            [0,  0,  0,  0,  0],
+            [0,  0,  0,  0, -6],
+            [0,  0,  0,  5, -4],
+            [0,  0,  0, -2,  0]
+        ]
+    };
+    let mut moves = board::valid_move(&board, 1, 2);
+    moves.sort();
+    let mut ans = vec![010];
+    ans.sort();
+    assert_eq!(ans, moves);
+}

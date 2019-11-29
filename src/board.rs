@@ -1,23 +1,13 @@
 use std::fmt;
 
+use crate::constants;
+
 #[derive(Debug, PartialEq, Clone)]
 pub struct Board {
     pub red_remain: i32,
     pub blue_remain: i32,
     pub data: [[i32; 5]; 5],
 }
-
-const DIR: [[i32; 2]; 8] = [
-    [0, -1],
-    [-1, -1],
-    [-1, 0],
-    [-1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 0],
-    [1, -1],
-];
-
 
 // constructors
 impl Board {
@@ -40,8 +30,8 @@ impl Board {
 // methods
 impl Board {
     pub fn mov(&mut self, x: i32, y: i32, dir: i32) {
-        let nx = (x + DIR[dir as usize][0]) as u32;
-        let ny = (y + DIR[dir as usize][1]) as u32;
+        let nx = (x + constants::DIR[dir as usize][0]) as u32;
+        let ny = (y + constants::DIR[dir as usize][1]) as u32;
 
         let last = self.data[x as usize][y as usize];
         self.data[x as usize][y as usize] = 0;
@@ -114,8 +104,8 @@ pub fn valid_move(board: &Board, dice: i32, player: i32) -> Vec<i32> {
         let l: i32 = if player == 1 { 4 } else { 0 };
         let r: i32 = if player == 1 { 6 } else { 2 };
         for i in l..=r {
-            let nx = temp_pos[dice as usize][0] + DIR[i as usize][0];
-            let ny = temp_pos[dice as usize][1] + DIR[i as usize][1];
+            let nx = temp_pos[dice as usize][0] + constants::DIR[i as usize][0];
+            let ny = temp_pos[dice as usize][1] + constants::DIR[i as usize][1];
             if nx >= 0 && nx < 5 && ny >= 0 && ny < 5 {
                 ans.push(temp_pos[dice as usize][0] * 100 + temp_pos[dice as usize][1] * 10 + i);
             }
@@ -131,8 +121,8 @@ pub fn valid_move(board: &Board, dice: i32, player: i32) -> Vec<i32> {
         let l: i32 = if player == 1 { 4 } else { 0 };
         let r: i32 = if player == 1 { 6 } else { 2 };
         for i in l..=r {
-            let nx = temp_pos[it as usize][0] + DIR[i as usize][0];
-            let ny = temp_pos[it as usize][1] + DIR[i as usize][1];
+            let nx = temp_pos[it as usize][0] + constants::DIR[i as usize][0];
+            let ny = temp_pos[it as usize][1] + constants::DIR[i as usize][1];
             if nx >= 0 && nx < 5 && ny >= 0 && ny < 5 {
                 ans.push(temp_pos[it as usize][0] * 100 + temp_pos[it as usize][1] * 10 + i);
             }
@@ -147,8 +137,8 @@ pub fn valid_move(board: &Board, dice: i32, player: i32) -> Vec<i32> {
         let l: i32 = if player == 1 { 4 } else { 0 };
         let r: i32 = if player == 1 { 6 } else { 2 };
         for i in l..=r {
-            let nx = temp_pos[it as usize][0] + DIR[i as usize][0];
-            let ny = temp_pos[it as usize][1] + DIR[i as usize][1];
+            let nx = temp_pos[it as usize][0] + constants::DIR[i as usize][0];
+            let ny = temp_pos[it as usize][1] + constants::DIR[i as usize][1];
             if nx >= 0 && nx < 5 && ny >= 0 && ny < 5 {
                 ans.push(temp_pos[it as usize][0] * 100 + temp_pos[it as usize][1] * 10 + i);
             }
