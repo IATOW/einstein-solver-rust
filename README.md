@@ -9,4 +9,11 @@ cargo build
 ```
 
 ## run
-`cargo run`
+```bash
+cargo run
+```
+
+## run tests
+```bash
+cargo test
+```
